@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 import util.KeyHandler;
+import util.TileHandler;
 
 public class GamePanel extends JPanel implements Runnable {
 	private static final long serialVersionUID = 1L;
@@ -24,6 +25,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 	// SYSTEMS / UTILITIES
 	private final KeyHandler keyH = new KeyHandler();
+	private final TileHandler tileH = new TileHandler(this);
 
 	// THREADS
 	private Thread gameThread;
@@ -57,6 +59,10 @@ public class GamePanel extends JPanel implements Runnable {
 	public void startGameThread() {
 		gameThread = new Thread(this);
 		gameThread.start();
+	}
+
+	public void endGame() {
+		System.exit(0);
 	}
 
 	// Run game (at given frame-rate)
@@ -111,6 +117,7 @@ public class GamePanel extends JPanel implements Runnable {
 			title.draw(frame);
 			break;
 		case playState:
+			tileH.draw(frame);
 			player.draw(frame);
 			break;
 		case resultState:
@@ -119,4 +126,91 @@ public class GamePanel extends JPanel implements Runnable {
 		}
 	}
 
+	public Thread getGameThread() {
+		return gameThread;
+	}
+
+	public void setGameThread(Thread gameThread) {
+		this.gameThread = gameThread;
+	}
+
+	public int getGameState() {
+		return gameState;
+	}
+
+	public void setGameState(int gameState) {
+		this.gameState = gameState;
+	}
+
+	public Title getTitle() {
+		return title;
+	}
+
+	public void setTitle(Title title) {
+		this.title = title;
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
+	public Result getResult() {
+		return result;
+	}
+
+	public void setResult(Result result) {
+		this.result = result;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public int getTileSize() {
+		return tileSize;
+	}
+
+	public int getMaxScreenCols() {
+		return maxScreenCols;
+	}
+
+	public int getMaxScreenRows() {
+		return maxScreenRows;
+	}
+
+	public int getScreenWidth() {
+		return screenWidth;
+	}
+
+	public int getScreenHeight() {
+		return screenHeight;
+	}
+
+	public int getFps() {
+		return fps;
+	}
+
+	public KeyHandler getKeyH() {
+		return keyH;
+	}
+
+	public TileHandler getTileH() {
+		return tileH;
+	}
+
+	public int getTitleState() {
+		return titleState;
+	}
+
+	public int getPlayState() {
+		return playState;
+	}
+
+	public int getResultState() {
+		return resultState;
+	}
 }
