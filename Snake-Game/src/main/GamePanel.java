@@ -124,6 +124,8 @@ public class GamePanel extends JPanel implements Runnable {
 			result.draw(frame);
 			break;
 		}
+
+		frame.dispose();
 	}
 
 	public Thread getGameThread() {
