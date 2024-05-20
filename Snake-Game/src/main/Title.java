@@ -20,7 +20,8 @@ public class Title {
 	private int option; // Which option player is hovering
 
 	// Fonts
-	private final Font arial_80; // Arial, PLAIN, 80
+	private final Font arial_60; // Arial, PLAIN, 80
+	private final Font arial_10; // Arial, PLAIN, 10
 
 	// Start Button
 	private final String startString;
@@ -50,19 +51,20 @@ public class Title {
 		controlString = "Controls";
 		exitString = "Exit Game";
 
-		buttonX = 100;
-		startY = 100;
-		controlY = 280;
-		exitY = 460;
-		buttonWidth = 440;
-		buttonHeight = 80;
+		buttonX = gp.getScreenWidth() / 5;
+		startY = gp.getScreenHeight() / 7;
+		controlY = gp.getScreenHeight() / 7 * 3;
+		exitY = gp.getScreenHeight() / 7 * 5;
+		buttonWidth = gp.getScreenWidth() - (buttonX * 2);
+		buttonHeight = gp.getScreenHeight() / 7;
 		startButton = new Rectangle(buttonX, startY, buttonWidth, buttonHeight);
 		controlButton = new Rectangle(buttonX, controlY, buttonWidth, buttonHeight);
 		exitButton = new Rectangle(buttonX, exitY, buttonWidth, buttonHeight);
 
 		interval = 10;
 
-		arial_80 = new Font("Default", Font.PLAIN, 80);
+		arial_10 = new Font("Arial", Font.BOLD, 20);
+		arial_60 = new Font("Arial", Font.BOLD, 60);
 
 		startNewTitle();
 	}
@@ -117,30 +119,25 @@ public class Title {
 
 	// Paint title screen
 	public void draw(Graphics2D frame) {
+		frame.setFont(arial_10);
+		frame.setColor(Color.white);
 		frame.fill(startButton);
 		frame.drawString(startString, startButton.x, startButton.y);
 		frame.fill(controlButton);
 		frame.drawString(controlString, controlButton.x, controlButton.y);
 		frame.fill(exitButton);
 		frame.drawString(exitString, exitButton.x, exitButton.y);
+		frame.setFont(arial_60);
+		frame.setColor(Color.black);
 		switch (option) {
 		case 0:
-			frame.draw(startButton);
-			frame.setFont(arial_80);
-			frame.setColor(Color.white);
-			frame.drawString(startString, startButton.x, startButton.y + 80);
+			frame.drawString(startString, startButton.x, startButton.y + buttonHeight);
 			break;
 		case 1:
-			frame.draw(controlButton);
-			frame.setFont(arial_80);
-			frame.setColor(Color.white);
-			frame.drawString(controlString, controlButton.x, controlButton.y + 80);
+			frame.drawString(controlString, controlButton.x, controlButton.y + buttonHeight);
 			break;
 		case 2:
-			frame.draw(exitButton);
-			frame.setFont(arial_80);
-			frame.setColor(Color.white);
-			frame.drawString(exitString, exitButton.x, exitButton.y + 80);
+			frame.drawString(exitString, exitButton.x, exitButton.y + buttonHeight);
 			break;
 		}
 	}
